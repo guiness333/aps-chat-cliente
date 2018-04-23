@@ -40,8 +40,8 @@ public class TelaChat extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         JTxtFieldChatInput = new javax.swing.JTextField();
         btnEnviarChat = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnEnvioArquivo = new javax.swing.JButton();
+        BtnAudio = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         taChat = new javax.swing.JTextArea();
         btnSettings = new javax.swing.JButton();
@@ -65,16 +65,16 @@ public class TelaChat extends javax.swing.JFrame {
         btnEnviarChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/enviar.png"))); // NOI18N
         jPanel1.add(btnEnviarChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 378, -1, -1));
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/video.png"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnEnvioArquivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/video.png"))); // NOI18N
+        btnEnvioArquivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnEnvioArquivoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 172, 89, 96));
+        jPanel1.add(btnEnvioArquivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 172, 89, 96));
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/Audio.png"))); // NOI18N
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 70, 89, 96));
+        BtnAudio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/Audio.png"))); // NOI18N
+        jPanel1.add(BtnAudio, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 70, 89, 96));
 
         taChat.setColumns(20);
         taChat.setRows(5);
@@ -129,12 +129,12 @@ public class TelaChat extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnEnvioArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnvioArquivoActionPerformed
         // TODO add your handling code here:
         TelaSelecaoArquivo tsa = new TelaSelecaoArquivo();
         tsa.setVisible(true);
         tsa.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnEnvioArquivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,14 +187,14 @@ public class TelaChat extends javax.swing.JFrame {
         }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAudio;
     private javax.swing.JTextField JTxtFieldChatInput;
     private javax.swing.JButton btnEnviarChat;
+    private javax.swing.JButton btnEnvioArquivo;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSettings;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
