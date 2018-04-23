@@ -1,0 +1,58 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package chatambiental;
+
+
+import View.TelaLogin;
+
+/**
+ *
+ * @author jorge
+ */
+public class Main {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+
+        // TODO code application logic here
+        
+        TelaLogin tl = new TelaLogin();
+        Cliente.iniciar();
+        tl.setVisible(true);
+        tl.setLocationRelativeTo(null);
+
+        /*JTextField username = new JTextField();
+        JTextField password = new JPasswordField();
+        Object[] message = {
+        "Username:", username,
+        "Password:", password
+        };
+        int option = JOptionPane.OK_OPTION;
+        
+        while(option != JOptionPane.CANCEL_OPTION){
+            option = JOptionPane.showConfirmDialog(null,message,"Login",JOptionPane.OK_CANCEL_OPTION);
+            String login = username.getText();
+            String senha = password.getText();
+
+            if(option == JOptionPane.OK_OPTION)
+                if(LoginDAO.verificarCredenciais(login, senha)){
+                    option = JOptionPane.CANCEL_OPTION;
+                    ServerView serverView = new ServerView();
+                    serverView.setVisible(true);
+                }
+                else{
+                    System.out.println("Login ou senha inválidos");
+                }
+            else{
+                option = JOptionPane.CANCEL_OPTION;
+            }
+        }*/
+
+    }
+    
+}
