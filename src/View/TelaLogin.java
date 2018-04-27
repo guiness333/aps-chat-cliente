@@ -6,6 +6,8 @@
 package View;
 
 import chatambiental.Cliente;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import util.Check;
 
 /**
@@ -98,13 +100,23 @@ public class TelaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (!Check.checarNull(txtUsuario.getText()) && !Check.checarNull(txtSenha.getText())) {
-            System.out.println("rodei");
             Cliente.enviar(txtUsuario.getText());
             Cliente.enviar(txtSenha.getText());
+            Cliente.armazenarUsuario(txtUsuario.getText());
+
+            try {
+                String resposta = Cliente.receber();
+                JOptionPane.showMessageDialog(null, resposta);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            TelaPrincipal tp = new TelaPrincipal();
+            tp.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario ou senha incorretos");
         }
-        TelaPrincipal tp = new TelaPrincipal();
-        tp.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

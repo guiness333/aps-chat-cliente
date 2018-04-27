@@ -13,8 +13,8 @@ import java.net.Socket;
 
 /**
  *
- * @author Aluno
- */
+ * @author Aluno*/
+
 public class RespostaServidor extends Thread {
 
     String response;

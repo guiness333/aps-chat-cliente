@@ -23,4 +23,9 @@ public class Check {
        public static boolean checarNull(String txtFieldPorta) {
         return txtFieldPorta.length() == 0;
     }
+       
+    public static String limpar(){
+        String txtArea = "";
+        return txtArea;
+    }
 }
