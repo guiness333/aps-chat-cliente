@@ -30,7 +30,7 @@ public class RespostaServidor extends Thread {
 
     public void run() {
         try {
-            while ((response = in.readLine()) != null) {
+            while ((response = this.in.readLine()) != null) {
                 TelaChat.atualizar(response);
                 System.out.println(response);
             }

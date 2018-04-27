@@ -20,13 +20,14 @@ public class TelaChat extends javax.swing.JFrame {
      */
     public TelaChat() {
         initComponents();
+        Cliente.iniciarThreadResposta();
     }
     
     public static void atualizar(String msg){
         try{
         //if(!Check.checarNull(msg))
         System.out.println(msg);
-        taChat.append(msg);
+        taChat.append(msg+"\n");
         }catch(Exception ex){
             ex.printStackTrace();
         }
