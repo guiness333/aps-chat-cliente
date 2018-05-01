@@ -35,6 +35,7 @@ public class TelaSelecaoArquivo extends javax.swing.JFrame {
         Choose = new javax.swing.JFileChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         Choose.setAcceptAllFileFilterUsed(false);
         Choose.setApproveButtonText("");
