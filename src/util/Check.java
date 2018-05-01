@@ -14,17 +14,17 @@ public class Check {
     public static boolean checarTamanhoPorta(String txtFieldPorta) {
         return txtFieldPorta.length() == 4;
     }
-    
+
     public static boolean checarCaracteres(String txtFieldPorta) {
         String regex = "\\w";
         return txtFieldPorta.matches(regex);
     }
-    
-       public static boolean checarNull(String txtFieldPorta) {
+
+    public static boolean checarNull(String txtFieldPorta) {
         return txtFieldPorta.length() == 0;
     }
-       
-    public static String limpar(){
+
+    public static String limpar() {
         String txtArea = "";
         return txtArea;
     }

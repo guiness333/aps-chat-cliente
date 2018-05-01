@@ -98,22 +98,30 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
-        if (!Check.checarNull(txtUsuario.getText()) && !Check.checarNull(txtSenha.getText())) {
+        String msgResposta = "";
+        Boolean logado = false;
+        
+        if (!txtUsuario.getText().isEmpty() && !txtSenha.getText().isEmpty()) {
             Cliente.enviar(txtUsuario.getText());
             Cliente.enviar(txtSenha.getText());
             Cliente.armazenarUsuario(txtUsuario.getText());
 
             try {
-                String resposta = Cliente.receber();
-                JOptionPane.showMessageDialog(null, resposta);
+                logado = Boolean.parseBoolean(Cliente.receber());
+                msgResposta = Cliente.receber();
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            TelaPrincipal tp = new TelaPrincipal();
-            tp.setVisible(true);
-            this.dispose();
+            if (logado) {
+                JOptionPane.showMessageDialog(null, msgResposta);
+                TelaPrincipal tp = new TelaPrincipal();
+                tp.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, msgResposta);
+            }
+
         } else {
             JOptionPane.showMessageDialog(null, "Usuario ou senha incorretos");
         }
