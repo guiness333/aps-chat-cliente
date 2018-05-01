@@ -1,2 +1,0 @@
-TesteCliente
-TesteCliente$resposta

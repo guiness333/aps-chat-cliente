@@ -22,15 +22,15 @@ public class TelaChat extends javax.swing.JFrame {
         initComponents();
         Cliente.iniciarThreadResposta();
     }
-    
-    public static void atualizar(String msg){
-        try{
+
+    public static void atualizar(String msg) {
+        //try{
         //if(!Check.checarNull(msg))
         System.out.println(msg);
-        taChat.append(msg+"\n");
-        }catch(Exception ex){
+        taChat.append(msg + "\n");
+        /*}catch(Exception ex){
             ex.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -175,13 +175,12 @@ public class TelaChat extends javax.swing.JFrame {
     private void btnEnviarChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarChatActionPerformed
         // TODO add your handling code here:
 
-        if(!Check.checarNull(txtChatLacuna.getText())){
+        if (!txtChatLacuna.getText().isEmpty()) {
             Cliente.enviar(txtChatLacuna.getText());
-            taChat.append(Cliente.devolverUsuario()+" : "+txtChatLacuna.getText()+"\n");
+            taChat.append(Cliente.devolverUsuario() + " : " + txtChatLacuna.getText() + "\n");
             txtChatLacuna.setText("");
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Campo de texto vacio!!!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo de texto vazio!!!");
         }
     }//GEN-LAST:event_btnEnviarChatActionPerformed
 
@@ -220,7 +219,7 @@ public class TelaChat extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviarChat;
