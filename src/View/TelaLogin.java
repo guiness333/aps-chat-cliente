@@ -7,6 +7,7 @@ package View;
 
 import chatambiental.Cliente;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import util.Check;
@@ -22,6 +23,36 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public TelaLogin() {
         initComponents();
+    }
+
+    private void login() {
+        String msgResposta = "";
+        Boolean logado = false;
+
+        if (!txtUsuario.getText().isEmpty() && !txtSenha.getText().isEmpty()) {
+            Cliente.enviar(txtUsuario.getText());
+            Cliente.enviar(txtSenha.getText());
+            Cliente.armazenarUsuario(txtUsuario.getText());
+
+            try {
+                logado = Boolean.parseBoolean(Cliente.receber());
+                msgResposta = Cliente.receber();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (logado) {
+                JOptionPane.showMessageDialog(null, msgResposta);
+                TelaPrincipal tp = new TelaPrincipal();
+                tp.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, msgResposta);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario ou senha incorretos");
+        }
     }
 
     /**
@@ -64,7 +95,19 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Usuario");
 
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyPressed(evt);
+            }
+        });
+
         jLabel3.setText("Senha");
+
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyPressed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -136,51 +179,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-String msgResposta = "";
-        Boolean logado = false;
-        
-        if (!txtUsuario.getText().isEmpty() && !txtSenha.getText().isEmpty()) {
-            Cliente.enviar(txtUsuario.getText());
-            Cliente.enviar(txtSenha.getText());
-            Cliente.armazenarUsuario(txtUsuario.getText());
-
-            try {
-                logado = Boolean.parseBoolean(Cliente.receber());
-                msgResposta = Cliente.receber();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            if (logado) {
-                JOptionPane.showMessageDialog(null, msgResposta);
-                TelaPrincipal tp = new TelaPrincipal();
-                tp.setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, msgResposta);
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuario ou senha incorretos");
-        }
-        if (!Check.checarNull(txtUsuario.getText()) && !Check.checarNull(txtSenha.getText())) {
-            Cliente.enviar(txtUsuario.getText());
-            Cliente.enviar(txtSenha.getText());
-            Cliente.armazenarUsuario(txtUsuario.getText());
-
-            try {
-                String resposta = Cliente.receber();
-                JOptionPane.showMessageDialog(null, resposta);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            TelaPrincipal tp = new TelaPrincipal();
-            tp.setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuario ou senha incorretos");
-        }
+        login();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -203,6 +202,20 @@ String msgResposta = "";
         // TODO add your handling code here:
         jLabel1.setForeground(Color.BLUE);
     }//GEN-LAST:event_jLabel1MouseExited
+
+    private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            login();
+        }
+    }//GEN-LAST:event_txtSenhaKeyPressed
+
+    private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            login();
+        }
+    }//GEN-LAST:event_txtUsuarioKeyPressed
 
     /**
      * @param args the command line arguments

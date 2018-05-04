@@ -6,6 +6,7 @@
 package View;
 
 import chatambiental.Cliente;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import util.Check;
 
@@ -23,15 +24,19 @@ public class TelaChat extends javax.swing.JFrame {
         Cliente.iniciarThreadResposta();
         taChat.setEditable(false);
     }
-    
-    public static void atualizar(String msg){
-        try{
-        //if(!Check.checarNull(msg))
-        System.out.println(msg);
-        taChat.append(msg+"\n");
-        }catch(Exception ex){
-            ex.printStackTrace();
+
+    private void enviarMsg() {
+        if (!txtChatLacuna.getText().isEmpty()) {
+            Cliente.enviar(txtChatLacuna.getText());
+            taChat.append(Cliente.devolverUsuario() + " : " + txtChatLacuna.getText() + "\n");
+            txtChatLacuna.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo de texto vacio!!!");
         }
+    }
+    
+    public static void atualizar(String msg) {
+        taChat.append(msg + "\n");
     }
 
     /**
@@ -70,6 +75,12 @@ public class TelaChat extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtChatLacuna.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtChatLacunaKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtChatLacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 530, -1));
 
         btnEnviarChat.setBackground(new java.awt.Color(102, 255, 0));
@@ -234,23 +245,15 @@ public class TelaChat extends javax.swing.JFrame {
 
     private void btnEnviarChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarChatActionPerformed
         // TODO add your handling code here:
-
-        if(!Check.checarNull(txtChatLacuna.getText())){
-            Cliente.enviar(txtChatLacuna.getText());
-            taChat.append(Cliente.devolverUsuario()+" : "+txtChatLacuna.getText()+"\n");
-            txtChatLacuna.setText("");
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Campo de texto vacio!!!");
-        }
+        enviarMsg();
     }//GEN-LAST:event_btnEnviarChatActionPerformed
 
     private void cbBoxArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBoxArquivoActionPerformed
         // TODO add your handling code here:
-        if(cbBoxArquivo.getSelectedItem() == "MP4"){
+        if (cbBoxArquivo.getSelectedItem() == "MP4") {
             TelaSelecaoArquivo tsa = new TelaSelecaoArquivo();
-            
-        }else if(cbBoxArquivo.getSelectedItem() == "MP3"){
+
+        } else if (cbBoxArquivo.getSelectedItem() == "MP3") {
             //TelaSeleçãoArquivo tsa = new TelaSeleçãoArquivo();
         }
     }//GEN-LAST:event_cbBoxArquivoActionPerformed
@@ -280,11 +283,18 @@ public class TelaChat extends javax.swing.JFrame {
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
         int dialog = JOptionPane.YES_NO_OPTION;
-        JOptionPane.showConfirmDialog(null,"Deseja realmente sair","Exit", dialog);
-        if(dialog == JOptionPane.YES_OPTION){
+        JOptionPane.showConfirmDialog(null, "Deseja realmente sair", "Exit", dialog);
+        if (dialog == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void txtChatLacunaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChatLacunaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            enviarMsg();
+        }
+    }//GEN-LAST:event_txtChatLacunaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -321,7 +331,7 @@ public class TelaChat extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
