@@ -33,23 +33,6 @@ public class Cliente {
      * cliente)
      *
      */
-    /*public String mensagem() {
-        try {
-            cli = new Socket("localhost", 2222);
-            out = new PrintStream(cli.getOutputStream());
-            in = new BufferedReader(new InputStreamReader(cli.getInputStream()));
-
-            new Thread(new resposta()).start();
-
-            while (true) {
-                out.println();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return in.toString();
-    }*/
-
       public static void iniciar() {
         try {
             cli = new Socket("localhost", 2222);
