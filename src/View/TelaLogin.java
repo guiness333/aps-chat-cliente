@@ -163,24 +163,6 @@ String msgResposta = "";
         } else {
             JOptionPane.showMessageDialog(null, "Usuario ou senha incorretos");
         }
-        if (!Check.checarNull(txtUsuario.getText()) && !Check.checarNull(txtSenha.getText())) {
-            Cliente.enviar(txtUsuario.getText());
-            Cliente.enviar(txtSenha.getText());
-            Cliente.armazenarUsuario(txtUsuario.getText());
-
-            try {
-                String resposta = Cliente.receber();
-                JOptionPane.showMessageDialog(null, resposta);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            TelaPrincipal tp = new TelaPrincipal();
-            tp.setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuario ou senha incorretos");
-        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
