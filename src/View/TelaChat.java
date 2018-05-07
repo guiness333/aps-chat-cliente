@@ -93,6 +93,7 @@ public class TelaChat extends javax.swing.JFrame {
         jPanel1.add(btnEnviarChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 390, 40, -1));
 
         taChat.setColumns(20);
+        taChat.setLineWrap(true);
         taChat.setRows(5);
         jScrollPane2.setViewportView(taChat);
 
@@ -282,8 +283,7 @@ public class TelaChat extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        int dialog = JOptionPane.YES_NO_OPTION;
-        JOptionPane.showConfirmDialog(null, "Deseja realmente sair", "Exit", dialog);
+        int dialog = JOptionPane.showConfirmDialog(null, "Deseja realmente sair", "Exit", JOptionPane.YES_NO_OPTION);
         if (dialog == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
