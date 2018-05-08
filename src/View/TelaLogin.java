@@ -30,8 +30,7 @@ public class TelaLogin extends javax.swing.JFrame {
         Boolean logado = false;
 
         if (!txtUsuario.getText().isEmpty() && !txtSenha.getText().isEmpty()) {
-            Cliente.enviar(txtUsuario.getText());
-            Cliente.enviar(txtSenha.getText());
+            Cliente.enviar(txtUsuario.getText()+":"+txtSenha.getText());
             Cliente.armazenarUsuario(txtUsuario.getText());
 
             try {

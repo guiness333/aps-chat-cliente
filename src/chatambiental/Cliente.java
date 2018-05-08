@@ -60,8 +60,9 @@ public class Cliente {
     
     public static String receber() {
         try{
-        ois = new ObjectInputStream(cli.getInputStream());
-        
+            if(ois == null)
+                ois = new ObjectInputStream(cli.getInputStream());
+            
         Mensagem recebido = (Mensagem) ois.readObject();
         return recebido.mensagem;
         }catch(Exception e){
