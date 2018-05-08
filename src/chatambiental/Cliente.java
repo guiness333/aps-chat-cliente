@@ -49,7 +49,8 @@ public class Cliente {
     
     public static void enviar(String mensagem) {
         try {
-            oos = new ObjectOutputStream(cli.getOutputStream());
+            if(oos == null)
+                oos = new ObjectOutputStream(cli.getOutputStream());
             oos.writeObject(new Mensagem(mensagem));
             oos.flush();
             //out.println(mensagem);
@@ -59,16 +60,16 @@ public class Cliente {
     }
     
     public static String receber() {
+        Mensagem recebido = null;
         try{
             if(ois == null)
                 ois = new ObjectInputStream(cli.getInputStream());
-            
-        Mensagem recebido = (Mensagem) ois.readObject();
-        return recebido.mensagem;
+        recebido = (Mensagem) ois.readObject();
+        
         }catch(Exception e){
             e.printStackTrace();
         }
-        return null;
+        return recebido.mensagem;
     }
     
     public static void iniciarThreadResposta() {
