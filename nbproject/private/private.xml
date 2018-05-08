@@ -3,11 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/Downloads/aps-chat-cliente-master/src/chatambiental/Mensagem.java</file>
             <file>file:/D:/Downloads/aps-chat-cliente-master/src/chatambiental/Main.java</file>
             <file>file:/D:/Downloads/aps-chat-cliente-master/src/View/TelaLogin.java</file>
             <file>file:/D:/Downloads/aps-chat-cliente-master/src/chatambiental/Cliente.java</file>
             <file>file:/D:/Downloads/aps-chat-cliente-master/src/chatambiental/RespostaServidor.java</file>
+=======
+            <file>file:/C:/Users/Math/aps-chat-cliente/src/View/TelaChat.java</file>
+            <file>file:/C:/Users/Math/aps-chat-cliente/src/View/TelaPrincipal.java</file>
+            <file>file:/C:/Users/Math/aps-chat-cliente/src/View/TelaLogin.java</file>
+            <file>file:/C:/Users/Math/aps-chat-cliente/src/View/TelaOnlines.java</file>
+            <file>file:/C:/Users/Math/aps-chat-cliente/src/View/TelaSobre.java</file>
+>>>>>>> da95be61511e0ed2bee76e95ab4b7a09d881ff38
         </group>
     </open-files>
 </project-private>

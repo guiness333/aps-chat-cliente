@@ -5,6 +5,8 @@
  */
 package util;
 
+import java.awt.Color;
+
 /**
  *
  * @author jorge
@@ -28,4 +30,10 @@ public class Check {
         String txtArea = "";
         return txtArea;
     }
+    
+    /*public static String alterarCor(){
+        boolean alternateColor = false;
+        Color textColor = alternateColor ? Color.BLUE : Color.BLACK;
+        return textColor;
+    }*/
 }
