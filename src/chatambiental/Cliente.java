@@ -25,6 +25,8 @@ public class Cliente {
     private static PrintStream out;
     private static BufferedReader in;
     private static String usuario;
+    private static ObjectOutputStream oos;
+    private static ObjectInputStream ois;
 
     /**
      *
@@ -33,44 +35,43 @@ public class Cliente {
      * cliente)
      *
      */
-    /*public String mensagem() {
-        try {
-            cli = new Socket("localhost", 2222);
-            out = new PrintStream(cli.getOutputStream());
-            in = new BufferedReader(new InputStreamReader(cli.getInputStream()));
-
-            new Thread(new resposta()).start();
-
-            while (true) {
-                out.println();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return in.toString();
-    }*/
-
       public static void iniciar() {
         try {
             cli = new Socket("localhost", 2222);
             out = new PrintStream(cli.getOutputStream());
             in = new BufferedReader(new InputStreamReader(cli.getInputStream()));
-            
+            //ois = new ObjectInputStream(cli.getInputStream());
+            //oos = new ObjectOutputStream(cli.getOutputStream());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
     
     public static void enviar(String mensagem) {
-        out.println(mensagem);
+        try {
+            oos = new ObjectOutputStream(cli.getOutputStream());
+            oos.writeObject(new Mensagem(mensagem));
+            oos.flush();
+            //out.println(mensagem);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     
-    public static String receber() throws IOException {
-        return in.readLine();
+    public static String receber() {
+        try{
+        ois = new ObjectInputStream(cli.getInputStream());
+        
+        Mensagem recebido = (Mensagem) ois.readObject();
+        return recebido.mensagem;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
     
     public static void iniciarThreadResposta() {
-        new Thread(new RespostaServidor(cli, out, in)).start();
+        new Thread(new RespostaServidor(cli, out, in, ois)).start();
     }
     
     public static void armazenarUsuario(String user){

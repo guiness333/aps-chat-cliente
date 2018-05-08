@@ -6,6 +6,7 @@
 package View;
 
 import chatambiental.Cliente;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import util.Check;
 
@@ -21,16 +22,21 @@ public class TelaChat extends javax.swing.JFrame {
     public TelaChat() {
         initComponents();
         Cliente.iniciarThreadResposta();
+        taChat.setEditable(false);
+    }
+
+    private void enviarMsg() {
+        if (!txtChatLacuna.getText().isEmpty()) {
+            Cliente.enviar(txtChatLacuna.getText());
+            taChat.append(Cliente.devolverUsuario() + " : " + txtChatLacuna.getText() + "\n");
+            txtChatLacuna.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Campo de texto vacio!!!");
+        }
     }
     
-    public static void atualizar(String msg){
-        try{
-        //if(!Check.checarNull(msg))
-        System.out.println(msg);
-        taChat.append(msg+"\n");
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
+    public static void atualizar(String msg) {
+        taChat.append(msg + "\n");
     }
 
     /**
@@ -42,148 +48,253 @@ public class TelaChat extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToggleButton1 = new javax.swing.JToggleButton();
         jPanel1 = new javax.swing.JPanel();
         txtChatLacuna = new javax.swing.JTextField();
         btnEnviarChat = new javax.swing.JButton();
-        btnEnvioArquivo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         taChat = new javax.swing.JTextArea();
-        jLabel6 = new javax.swing.JLabel();
-        btnSettings = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
-        btnHome = new javax.swing.JButton();
+        cbBoxArquivo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        btnOnlinesDisabled1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnSobre = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
+        Logo = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+
+        jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtChatLacuna.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtChatLacunaKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txtChatLacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 530, -1));
+
+        btnEnviarChat.setBackground(new java.awt.Color(102, 255, 0));
         btnEnviarChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/enviar.png"))); // NOI18N
         btnEnviarChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEnviarChatActionPerformed(evt);
             }
         });
-
-        btnEnvioArquivo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnEnvioArquivo.setText("+");
-        btnEnvioArquivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEnvioArquivoActionPerformed(evt);
-            }
-        });
+        jPanel1.add(btnEnviarChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 390, 40, -1));
 
         taChat.setColumns(20);
         taChat.setRows(5);
         jScrollPane2.setViewportView(taChat);
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        jLabel6.setText("Onlines");
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 580, 290));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnEnvioArquivo)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtChatLacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(btnEnviarChat, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addGap(52, 52, 52)
-                .addComponent(jLabel6)
-                .addGap(105, 105, 105))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jLabel6)
-                .addGap(373, 373, 373))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnEnvioArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtChatLacuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEnviarChat))
-                .addGap(29, 29, 29))
-        );
+        cbBoxArquivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nenhum", "MP4", "MP3" }));
+        cbBoxArquivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBoxArquivoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbBoxArquivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 110, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 920, 460));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Chat Geral");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 100, -1));
 
-        btnSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/Setting.png"))); // NOI18N
-        btnSettings.setToolTipText("Configurações");
-        btnSettings.setBorder(null);
-        btnSettings.setBorderPainted(false);
-        btnSettings.setContentAreaFilled(false);
-        btnSettings.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(btnSettings, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 50, 50));
+        btnOnlinesDisabled1.setBackground(new java.awt.Color(204, 204, 204));
+        btnOnlinesDisabled1.setFont(new java.awt.Font("Arial", 2, 11)); // NOI18N
+        btnOnlinesDisabled1.setEnabled(false);
+        jPanel1.add(btnOnlinesDisabled1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 390, 40));
 
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/Exit.png"))); // NOI18N
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 660, 450));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("WWF - Software de Comunicação");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        btnSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/btnInformat.png"))); // NOI18N
+        btnSobre.setBorderPainted(false);
+        btnSobre.setContentAreaFilled(false);
+        btnSobre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSobre.setEnabled(false);
+        btnSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSobreActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSobre, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, -1, 60));
+
+        jButton1.setBackground(new java.awt.Color(102, 102, 102));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Chat");
+        jButton1.setToolTipText("Mensagens");
+        jButton1.setBorderPainted(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setEnabled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(204, 204, 204));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Contatos");
+        jButton2.setToolTipText("Listar contatos");
+        jButton2.setBorderPainted(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jButton3.setBackground(new java.awt.Color(204, 204, 204));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Notas");
+        jButton3.setToolTipText("Criar ocorrencia");
+        jButton3.setBorderPainted(false);
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnExit.setBackground(new java.awt.Color(204, 204, 204));
+        btnExit.setForeground(new java.awt.Color(255, 255, 255));
+        btnExit.setText("Sair");
         btnExit.setToolTipText("Encerrar sessão");
         btnExit.setBorder(null);
         btnExit.setBorderPainted(false);
-        btnExit.setContentAreaFilled(false);
         btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 50, 50));
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
-        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/Home.png"))); // NOI18N
-        btnHome.setToolTipText("Menu principal");
-        btnHome.setBorder(null);
-        btnHome.setBorderPainted(false);
-        btnHome.setContentAreaFilled(false);
-        btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 50, 50));
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/logoProjeto (1).png"))); // NOI18N
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/Linha.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 50, 70));
+        jButton5.setBackground(new java.awt.Color(204, 204, 204));
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setText("Principal");
+        jButton5.setToolTipText("Mensagens");
+        jButton5.setBorderPainted(false);
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setText("Local de Acesso:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, -1, -1));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(Logo)))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Logo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel5.setText("Nivel de Acesso:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 45, -1, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 84, 270, -1));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("Usuario:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 5, -1, -1));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/PainelTop.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 70));
+        jButton4.setBackground(new java.awt.Color(204, 204, 204));
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
+        jButton4.setToolTipText("");
+        jButton4.setBorderPainted(false);
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton4.setEnabled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 80));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEnvioArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnvioArquivoActionPerformed
-        TelaSelecaoArquivo tsa = new TelaSelecaoArquivo();
-        tsa.setVisible(true);
-        tsa.setLocationRelativeTo(null);
-    }//GEN-LAST:event_btnEnvioArquivoActionPerformed
-
     private void btnEnviarChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarChatActionPerformed
         // TODO add your handling code here:
-
-        if(!Check.checarNull(txtChatLacuna.getText())){
-            Cliente.enviar(txtChatLacuna.getText());
-            taChat.append(Cliente.devolverUsuario()+" : "+txtChatLacuna.getText()+"\n");
-            txtChatLacuna.setText("");
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Campo de texto vacio!!!");
-        }
+        enviarMsg();
     }//GEN-LAST:event_btnEnviarChatActionPerformed
+
+    private void cbBoxArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBoxArquivoActionPerformed
+        // TODO add your handling code here:
+        if (cbBoxArquivo.getSelectedItem() == "MP4") {
+            TelaSelecaoArquivo tsa = new TelaSelecaoArquivo();
+
+        } else if (cbBoxArquivo.getSelectedItem() == "MP3") {
+            //TelaSeleçãoArquivo tsa = new TelaSeleçãoArquivo();
+        }
+    }//GEN-LAST:event_cbBoxArquivoActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSobreActionPerformed
+        // TODO add your handling code here:
+        TelaSobre ts = new TelaSobre();
+        ts.setVisible(true);
+    }//GEN-LAST:event_btnSobreActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        TelaChat tc = new TelaChat();
+        tc.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        int dialog = JOptionPane.YES_NO_OPTION;
+        JOptionPane.showConfirmDialog(null, "Deseja realmente sair", "Exit", dialog);
+        if (dialog == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void txtChatLacunaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtChatLacunaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            enviarMsg();
+        }
+    }//GEN-LAST:event_txtChatLacunaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -220,22 +331,26 @@ public class TelaChat extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Logo;
     private javax.swing.JButton btnEnviarChat;
-    private javax.swing.JButton btnEnvioArquivo;
     private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnHome;
-    private javax.swing.JButton btnSettings;
+    private javax.swing.JButton btnOnlinesDisabled1;
+    private javax.swing.JButton btnSobre;
+    private javax.swing.JComboBox<String> cbBoxArquivo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JToggleButton jToggleButton1;
     public static javax.swing.JTextArea taChat;
     public static javax.swing.JTextField txtChatLacuna;
     // End of variables declaration//GEN-END:variables
