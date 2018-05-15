@@ -119,7 +119,7 @@ public class TelaChat extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 580, 290));
 
-        cbBoxArquivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nenhum", "MP4", "MP3" }));
+        cbBoxArquivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enviar Arquivo", "Video", "Audio" }));
         cbBoxArquivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbBoxArquivoActionPerformed(evt);
@@ -269,23 +269,25 @@ public class TelaChat extends javax.swing.JFrame {
     private void cbBoxArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBoxArquivoActionPerformed
        JFileChooser chooser = new JFileChooser();
        FileNameExtensionFilter filter= null;
-        if (cbBoxArquivo.getSelectedItem() == "MP4") {
-            filter = new FileNameExtensionFilter("MP4", "mp4");
-            
-        } else if (cbBoxArquivo.getSelectedItem() == "MP3") {
-            filter = new FileNameExtensionFilter("MP3", "mp3");
+        if (cbBoxArquivo.getSelectedItem() == "Video") {
+            filter = new FileNameExtensionFilter("Videos", "mp4", "wmv","avi","3gp","flv","rmvb","rm","mov","mkv","");
+        } else if (cbBoxArquivo.getSelectedItem() == "Audio") {
+            filter = new FileNameExtensionFilter("MP3", "mp3","aac","m4a","wav","wma","aiff","cdda","ape","flac");
         }
         chooser.setFileFilter(filter);
-        int ret = chooser.showOpenDialog(jPanel1);
-        if(ret == JFileChooser.APPROVE_OPTION){
-              File f = chooser.getSelectedFile();
-           try {
-               byte[] b = Files.readAllBytes(f.toPath());
-               Cliente.enviarArq(b,f.getName());
-               
-           } catch (IOException ex) {
-               Logger.getLogger(TelaChat.class.getName()).log(Level.SEVERE, null, ex);
-           }
+        if(filter != null){
+            int ret = chooser.showOpenDialog(jPanel1);
+            if(ret == JFileChooser.APPROVE_OPTION){
+                  File f = chooser.getSelectedFile();
+               try {
+                   byte[] b = Files.readAllBytes(f.toPath());
+                   Cliente.enviarArq(b,f.getName());
+                   taChat.append(Cliente.devolverUsuario()+ " : Enviou ("+f.getName()+ ")\n");
+
+               } catch (IOException ex) {
+                   Logger.getLogger(TelaChat.class.getName()).log(Level.SEVERE, null, ex);
+               }
+            }
         }
     }//GEN-LAST:event_cbBoxArquivoActionPerformed
 

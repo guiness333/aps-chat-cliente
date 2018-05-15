@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * Classe onde vai ocorrer toda a parte de comunicação do Usuario com o
  * servidor.
  *
- * @author Math
+ * @author Math/Walber
  */
 public class Cliente {
 
@@ -38,8 +38,8 @@ public class Cliente {
       public static void iniciar() {
         try {
             cli = new Socket("localhost", 2222);
-            out = new PrintStream(cli.getOutputStream());
-            in = new BufferedReader(new InputStreamReader(cli.getInputStream()));
+            //out = new PrintStream(cli.getOutputStream());
+            //in = new BufferedReader(new InputStreamReader(cli.getInputStream()));
             //ois = new ObjectInputStream(cli.getInputStream());
             //oos = new ObjectOutputStream(cli.getOutputStream());
         } catch (IOException ex) {
@@ -52,6 +52,7 @@ public class Cliente {
             if(oos == null)
                 oos = new ObjectOutputStream(cli.getOutputStream());
             oos.writeObject(new Mensagem(mensagem));
+            oos.reset();
             oos.flush();
             //out.println(mensagem);
         } catch (IOException ex) {
@@ -63,7 +64,8 @@ public class Cliente {
         try {
             if(oos == null)
                 oos = new ObjectOutputStream(cli.getOutputStream());
-            oos.writeObject(new Mensagem(bf, nome, nome.substring(nome.lastIndexOf("."))));
+            oos.writeObject(new Mensagem(bf,usuario, nome, nome.substring(nome.lastIndexOf("."))));
+            oos.reset();
             oos.flush();
             //out.println(mensagem);
         } catch (IOException ex) {
@@ -71,13 +73,13 @@ public class Cliente {
         }
     }
     
-    public static String receber() {
+    public static String receber() throws IOException {
         Mensagem recebido = null;
         try{
             if(ois == null)
                 ois = new ObjectInputStream(cli.getInputStream());
-        recebido = (Mensagem) ois.readObject();
         
+        recebido = (Mensagem) ois.readObject();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -93,7 +95,7 @@ public class Cliente {
     }
     
     public static String devolverUsuario(){
-    return usuario;
+        return usuario;
     }
 
 }

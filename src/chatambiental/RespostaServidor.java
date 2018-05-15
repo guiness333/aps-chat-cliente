@@ -37,7 +37,7 @@ public class RespostaServidor extends Thread {
 
     Mensagem response;
     private Socket cli;
-    public  String path = "CAMINHO\\";
+    public  String path = "E:\\Projetos\\Downloads\\";
     private PrintStream out;
     private BufferedReader in;
     private ObjectInputStream ois;
@@ -59,7 +59,7 @@ public class RespostaServidor extends Thread {
                     byte[] fl = response.arquivo;
                     FileOutputStream ww = new FileOutputStream(path+response.nomeArquivo);
                     ww.write(fl);
-                    TelaChat.atualizar(" Arquivo recebido \n"
+                    TelaChat.atualizar(response.remetente+": Enviou um Arquivo\n"
                             + " gravado em: "+ path+response.nomeArquivo);
                     
                 }
