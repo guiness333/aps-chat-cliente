@@ -59,6 +59,18 @@ public class Cliente {
         }
     }
     
+    public static void enviarArq(byte[] bf,String nome) {
+        try {
+            if(oos == null)
+                oos = new ObjectOutputStream(cli.getOutputStream());
+            oos.writeObject(new Mensagem(bf, nome, nome.substring(nome.lastIndexOf("."))));
+            oos.flush();
+            //out.println(mensagem);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     public static String receber() {
         Mensagem recebido = null;
         try{

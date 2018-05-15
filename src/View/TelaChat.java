@@ -6,8 +6,21 @@
 package View;
 
 import chatambiental.Cliente;
+import chatambiental.RespostaServidor;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.ProgressMonitorInputStream;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import sun.misc.IOUtils;
 import util.Check;
 
 /**
@@ -22,9 +35,8 @@ public class TelaChat extends javax.swing.JFrame {
     public TelaChat() {
         initComponents();
         Cliente.iniciarThreadResposta();
-       taChat.setEditable(false);       
+       taChat.setEditable(false);     
     }
-    
 
 
     private void enviarMsg() {
@@ -41,7 +53,6 @@ public class TelaChat extends javax.swing.JFrame {
     public static void atualizar(String msg) {
         taChat.append(msg + "\n");
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,12 +74,12 @@ public class TelaChat extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnSobre = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-       btnChat = new javax.swing.JButton();
+        btnChat = new javax.swing.JButton();
         btnContatos = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         Logo = new javax.swing.JLabel();
         btnPrincipal = new javax.swing.JButton();
-       jButton4 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -78,8 +89,13 @@ public class TelaChat extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-       txtChatLacuna.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-       txtChatLacuna.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtChatLacuna.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtChatLacuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtChatLacunaActionPerformed(evt);
+            }
+        });
+        txtChatLacuna.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtChatLacunaKeyPressed(evt);
             }
@@ -96,9 +112,9 @@ public class TelaChat extends javax.swing.JFrame {
         jPanel1.add(btnEnviarChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 390, 40, -1));
 
         taChat.setColumns(20);
-       taChat.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        taChat.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         taChat.setLineWrap(true);
-       taChat.setRows(5);
+        taChat.setRows(5);
         jScrollPane2.setViewportView(taChat);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 580, 290));
@@ -111,6 +127,7 @@ public class TelaChat extends javax.swing.JFrame {
         });
         jPanel1.add(cbBoxArquivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 110, -1));
 
+        jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Chat Geral");
@@ -120,6 +137,7 @@ public class TelaChat extends javax.swing.JFrame {
         btnOnlinesDisabled1.setFont(new java.awt.Font("Arial", 2, 11)); // NOI18N
         btnOnlinesDisabled1.setEnabled(false);
         jPanel1.add(btnOnlinesDisabled1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 390, 40));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 660, 450));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
@@ -165,7 +183,7 @@ public class TelaChat extends javax.swing.JFrame {
             }
         });
 
-       btnExit.setBackground(new java.awt.Color(204, 204, 204));
+        btnExit.setBackground(new java.awt.Color(204, 204, 204));
         btnExit.setForeground(new java.awt.Color(255, 255, 255));
         btnExit.setText("Sair");
         btnExit.setToolTipText("Encerrar sessão");
@@ -180,7 +198,7 @@ public class TelaChat extends javax.swing.JFrame {
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imgs/logoProjeto (1).png"))); // NOI18N
 
-       btnPrincipal.setBackground(new java.awt.Color(204, 204, 204));
+        btnPrincipal.setBackground(new java.awt.Color(204, 204, 204));
         btnPrincipal.setForeground(new java.awt.Color(255, 255, 255));
         btnPrincipal.setText("Principal");
         btnPrincipal.setToolTipText("Home");
@@ -189,7 +207,7 @@ public class TelaChat extends javax.swing.JFrame {
         btnPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrincipalActionPerformed(evt);
-           }
+            }
         });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -199,11 +217,11 @@ public class TelaChat extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                   .addComponent(btnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnContatos, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnChat, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                   .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(Logo)))
                 .addContainerGap(54, Short.MAX_VALUE))
@@ -214,7 +232,7 @@ public class TelaChat extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Logo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-               .addComponent(btnChat, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnChat, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnContatos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -222,7 +240,7 @@ public class TelaChat extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(72, Short.MAX_VALUE))
-       );
+        );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 84, 270, -1));
 
@@ -249,11 +267,25 @@ public class TelaChat extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnviarChatActionPerformed
 
     private void cbBoxArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBoxArquivoActionPerformed
-        // TODO add your handling code here:
+       JFileChooser chooser = new JFileChooser();
+       FileNameExtensionFilter filter= null;
         if (cbBoxArquivo.getSelectedItem() == "MP4") {
-           //TelaSelecaoArquivo tsa = new TelaSelecaoArquivo();
+            filter = new FileNameExtensionFilter("MP4", "mp4");
+            
         } else if (cbBoxArquivo.getSelectedItem() == "MP3") {
-            //TelaSeleçãoArquivo tsa = new TelaSeleçãoArquivo();
+            filter = new FileNameExtensionFilter("MP3", "mp3");
+        }
+        chooser.setFileFilter(filter);
+        int ret = chooser.showOpenDialog(jPanel1);
+        if(ret == JFileChooser.APPROVE_OPTION){
+              File f = chooser.getSelectedFile();
+           try {
+               byte[] b = Files.readAllBytes(f.toPath());
+               Cliente.enviarArq(b,f.getName());
+               
+           } catch (IOException ex) {
+               Logger.getLogger(TelaChat.class.getName()).log(Level.SEVERE, null, ex);
+           }
         }
     }//GEN-LAST:event_cbBoxArquivoActionPerformed
 
@@ -302,6 +334,10 @@ public class TelaChat extends javax.swing.JFrame {
         to.setVisible(true);
         
     }//GEN-LAST:event_btnContatosActionPerformed
+
+    private void txtChatLacunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtChatLacunaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtChatLacunaActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -341,7 +377,7 @@ public class TelaChat extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
-   private javax.swing.JButton btnChat;
+    private javax.swing.JButton btnChat;
     private javax.swing.JButton btnContatos;
     private javax.swing.JButton btnEnviarChat;
     private javax.swing.JButton btnExit;
@@ -350,7 +386,7 @@ public class TelaChat extends javax.swing.JFrame {
     private javax.swing.JButton btnSobre;
     private javax.swing.JComboBox<String> cbBoxArquivo;
     private javax.swing.JButton jButton4;
-   private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
