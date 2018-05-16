@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -28,13 +29,14 @@ import util.Check;
  * @author Aluno
  */
 public class TelaChat extends javax.swing.JFrame {
-
+    public static ArrayList<String> Onlines;
     /**
      * Creates new form TelaChaat
      */
     public TelaChat() {
         initComponents();
         Cliente.iniciarThreadResposta();
+        Onlines = new ArrayList<>();
        taChat.setEditable(false);     
     }
 
@@ -52,6 +54,21 @@ public class TelaChat extends javax.swing.JFrame {
     
     public static void atualizar(String msg) {
         taChat.append(msg + "\n");
+    }
+    public static void online(String on){
+        try{
+            
+                String[] a = on.split(":");
+                for(int i =1;i<a.length;i++){
+                    if(!Onlines.contains(a[i])){
+                        Onlines.add(a[i]+"\n");
+                    }
+                }
+            TelaOnlines to = new TelaOnlines();
+            to.setVisible(true);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,6 +88,8 @@ public class TelaChat extends javax.swing.JFrame {
         cbBoxArquivo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         btnOnlinesDisabled1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         btnSobre = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -117,7 +136,7 @@ public class TelaChat extends javax.swing.JFrame {
         taChat.setRows(5);
         jScrollPane2.setViewportView(taChat);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 580, 290));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 530, 290));
 
         cbBoxArquivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enviar Arquivo", "Video", "Audio" }));
         cbBoxArquivo.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +155,13 @@ public class TelaChat extends javax.swing.JFrame {
         btnOnlinesDisabled1.setBackground(new java.awt.Color(204, 204, 204));
         btnOnlinesDisabled1.setFont(new java.awt.Font("Arial", 2, 11)); // NOI18N
         btnOnlinesDisabled1.setEnabled(false);
-        jPanel1.add(btnOnlinesDisabled1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 390, 40));
+        jPanel1.add(btnOnlinesDisabled1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 340, 40));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, 80, 290));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 660, 450));
 
@@ -332,8 +357,11 @@ public class TelaChat extends javax.swing.JFrame {
     }//GEN-LAST:event_txtChatLacunaKeyPressed
     private void btnContatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContatosActionPerformed
         // TODO add your handling code here:
-        TelaOnlines to = new TelaOnlines();
-        to.setVisible(true);
+        Cliente.enviar("4646");
+       
+        /*TelaOnlines to = new TelaOnlines();
+       
+        to.setVisible(true);*/
         
     }//GEN-LAST:event_btnContatosActionPerformed
 
@@ -392,7 +420,9 @@ public class TelaChat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private static javax.swing.JTextArea jTextArea1;
     private javax.swing.JToggleButton jToggleButton1;
     public static javax.swing.JTextArea taChat;
     public static javax.swing.JTextField txtChatLacuna;

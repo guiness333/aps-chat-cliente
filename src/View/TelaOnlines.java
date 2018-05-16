@@ -7,6 +7,11 @@ package View;
 
 import chatambiental.Cliente;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -19,6 +24,7 @@ public class TelaOnlines extends javax.swing.JFrame {
      */
     public TelaOnlines() {
         initComponents();
+        
         Contar();
         taContador.setEditable(false);
     }
@@ -136,14 +142,21 @@ public class TelaOnlines extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+               
                 new TelaOnlines().setVisible(true);
+               
             }
         });
     }
     
     public void Contar(){
-        int cont = 1;
-        taContador.append(Cliente.devolverUsuario()+"\n");        
+        int cont = 0;
+        for(String o : TelaChat.Onlines){
+            if(!taContador.getText().contains(o)){
+                taContador.append(o);
+                cont++;
+            }
+        }
         lbContador.setText(""+cont);
         
         if (cont > 1){            

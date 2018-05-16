@@ -5,6 +5,9 @@
  */
 package View;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -207,6 +210,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         TelaOnlines to = new TelaOnlines();
+        
         to.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -6,6 +6,9 @@
 package chatambiental;
 
 import View.TelaChat;
+import View.TelaLogin;
+import View.TelaOnlines;
+import View.TelaPrincipal;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -22,11 +25,13 @@ import java.io.RandomAccessFile;
 import java.io.Writer;
 import java.net.Socket;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.concurrent.Task;
+import javax.swing.JOptionPane;
 import javax.swing.ProgressMonitor;
 
 /**
@@ -41,20 +46,23 @@ public class RespostaServidor extends Thread {
     private PrintStream out;
     private BufferedReader in;
     private ObjectInputStream ois;
-
+    private static ArrayList<String> online;
     public RespostaServidor(Socket pCli, PrintStream pOut, BufferedReader pIn, ObjectInputStream ois) {
         this.cli = pCli;
         this.out = pOut;
         this.in = pIn;
         this.ois = ois;
     }
-   
     public void run() {
         try {
             while ((response = (Mensagem)this.ois.readObject()) != null) {
                 if(response.arquivo == null){
-                    TelaChat.atualizar(response.mensagem);
-                    System.out.println(response.mensagem);
+                    if(response.mensagem.startsWith("353535")){
+                        TelaChat.online(response.mensagem.substring(5));
+                    }else{
+                        TelaChat.atualizar(response.mensagem);
+                        System.out.println(response.mensagem);
+                    }
                 }else{
                     byte[] fl = response.arquivo;
                     FileOutputStream ww = new FileOutputStream(path+response.nomeArquivo);
